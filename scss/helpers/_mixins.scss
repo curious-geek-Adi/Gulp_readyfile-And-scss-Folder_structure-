@@ -1,0 +1,403 @@
+/* placeholder */
+@mixin input-placeholder {
+	&.placeholder { @content; }
+	&:-moz-placeholder { @content; }
+	&::-moz-placeholder { @content; }
+	&:-ms-input-placeholder { @content; }
+	&::-webkit-input-placeholder { @content; }
+}
+
+$breakpoints: (
+	'custom-small-mobile-max': (max-width: 359px),
+	'portrait-mobile-max': (max-width: 575px),
+	'mobile-min': (min-width: 576px),
+	'mobile-max': (max-width: 767px),
+	'ipad-min': (min-width: 768px),
+	'ipad-max': (max-width: 991px),
+	'desktop-min': (min-width: 992px),
+	'desktop-max': (max-width: 1199px),
+	'large-desktop-min': (min-width: 1200px),
+	'medium-large-desktop-min': (min-width: 1366px),
+	'medium-large-desktop-max': (max-width: 1400px),
+);
+
+@mixin breakpoint($name) {
+	@if map-has-key($breakpoints, $name) {
+		@media #{inspect(map-get($breakpoints, $name))} {
+      		@content;
+		}
+	}
+  	@else {
+    	@warn "Couldn't find a breakpoint named `#{$name}`.";
+  	}
+}	
+
+// Opacity
+@mixin opacity($opacity) {
+	opacity: $opacity;
+	$opacity-ie: $opacity * 100;
+	filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+// Transition
+@mixin transition($what: all, $time: 0.5s, $how: ease-in-out) {
+	  transition: $what $time $how;
+}
+
+// RGBA Border
+@mixin border-rgba ($color, $opacity) {
+  	border: 1px solid rgba(red($color), green($color), blue($color), $opacity);
+}
+
+// Right RGBA Border
+@mixin border-right-rgba ($color, $opacity) {
+  	border-right: 1px solid rgba(red($color), green($color), blue($color), $opacity);
+}
+
+// Left RGBA Border
+@mixin border-left-rgba ($color, $opacity) {
+  	border-left: 1px solid rgba(red($color), green($color), blue($color), $opacity);
+}
+
+// Top RGBA Border
+@mixin border-top-rgba ($color, $opacity) {
+	border-top: 1px solid rgba(red($color), green($color), blue($color), $opacity);
+}
+
+// Bottom RGBA Border
+@mixin border-bottom-rgba ($color, $opacity) {
+  	border-bottom: 1px solid rgba(red($color), green($color), blue($color), $opacity);
+}
+
+// Background Color rgba
+@mixin background-color-rgba($color, $opacity) {
+  	background-color: rgba($color, $opacity);
+}
+
+// Color rgba
+@mixin color-rgba($color, $opacity) {
+  	color: rgba($color, $opacity);
+}
+
+// Horizontal and Center Align using Transform
+@mixin horizontal-center-transform {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+@mixin vertical-center-transform {
+	position: absolute;
+	top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin horizontal-vertical-center-transform {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+@mixin container {
+	max-width: $container-width;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: $grid-space;
+	padding-right: $grid-space;
+}
+
+// Header Style
+@mixin h1 {
+	font-size: 6rem;
+	font-weight: 900;
+	line-height: 1;
+}
+
+@mixin h2 {
+	font-size: 4.6rem;
+	font-weight: 500;
+	line-height: 1.08;
+	color: $text-color-dark;
+}
+
+@mixin h3 {
+	font-size: 4.2rem;
+	font-weight: 500;
+	line-height: 1.14;
+	color: $text-color-dark;
+	@include breakpoint(mobile-max) {
+		font-size: 3.2rem;
+	}
+}
+
+@mixin h4 {
+	font-size: 3.2rem;
+	font-weight: 500;
+	line-height: 1.5;
+	color: $text-color-dark;
+}
+
+@mixin h5 {
+	font-size: 2.4rem;
+	font-weight: 500;
+	line-height: 1.25;
+	color: $text-color-dark;
+}
+
+@mixin h6 {
+	font-size: 2rem;
+	font-weight: 500;
+	line-height: 1.2;
+	color: $text-color-dark;
+}
+
+@mixin note {
+	font-size: 1.2rem;
+	line-height: 1.5rem;
+	color: $text-color-light;
+}
+
+@mixin common-box-shadow-1 {
+  	box-shadow: 0px 4px 12px rgba(56, 56, 56, 0.2);
+}
+
+@mixin common-box-shadow-2 {
+  	box-shadow: 0px 4px 30px rgba(117, 116, 181, 0.2);
+}
+
+@mixin common-box-shadow-2-hover {
+  	box-shadow: 0px 4px 30px rgba(117, 116, 181, 0.6);
+}
+
+@mixin common-box-shadow-2-inset {
+  	box-shadow: 0px 4px 30px rgba(117, 116, 181, 0.2) inset;
+}
+
+@mixin common-box-shadow-3 {
+  	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+@mixin common-box-shadow-4 {
+  	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+@mixin bg-pattern-triangle {
+	background-image: url('../images/bg-pattern/triangle-bg-pattern.png');
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-size: 30%;
+	@include breakpoint(mobile-max) {
+		// background-image: none;
+	}
+}
+
+@mixin bg-pattern-triangle-full {
+	background-image: url('../images/bg-pattern/triangle-bg-pattern-style-2.png');
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-size: 30%;
+	@include breakpoint(mobile-max) {
+		background-image: none;
+	}
+}
+
+@mixin orange-gradient-style-1 {
+  	background: linear-gradient(234.56deg, #FFDCCA 21.8%, rgba(255, 254, 235, 0.84) 91.69%);
+}
+
+@mixin orange-gradient-style-2 {
+  	background: linear-gradient(145.57deg, #FF8C3A 7.2%, #FD4C00 92.24%)
+}
+
+@mixin navy-blue-gradient-style-1 {
+  	background: radial-gradient(81.05% 210.97% at 50.99% 0%, #173F95 15.1%, rgba(23, 63, 149, 0) 100%), #1E1C57;;
+}
+
+// Center Block
+@mixin center-block {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@mixin truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin img-hover-effect-style-1 {
+	position: relative;
+	overflow: hidden;
+	img {
+		@include transition();
+	}
+	&:hover {
+		img {
+		transform: scale(1.1);
+		}
+  	}	
+}
+
+@mixin common-box-design {
+	background-color: #fff;
+	border-radius: 2px;
+	@include common-box-shadow-2();
+}
+
+@mixin label-style-1 {
+	text-transform: uppercase;
+	color: $primary-color-orange;
+	font-size: 1.4rem;
+	font-weight: 500;
+}
+
+@mixin btn {
+	font-size: 1.4rem;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	font-weight: 500;
+	line-height: 1.14;
+	padding: 2rem 3.5rem;
+	border-radius: 30px;
+	@include transition();
+	@include breakpoint(mobile-max) {
+		padding: 1.5rem 2rem;
+	}
+}
+
+@mixin btn-primary {
+	background-color: $primary-color-orange;
+	border-color: $primary-color-orange;
+	color: $primary-color-white;
+	@include common-box-shadow-1();
+	&:hover,
+	&:focus,
+	&:not(:disabled):not(.disabled).active, 
+	&:not(:disabled):not(.disabled):active {
+		background-color: $primary-color-dark-blue;
+		border-color: $primary-color-dark-blue;
+		color: $primary-color-white;
+		@include common-box-shadow-1();
+	}
+	&.disabled,
+	&:disabled {
+		background-color: $primary-color-orange;
+		border-color: $primary-color-orange;
+		color: $primary-color-white;
+	}
+	&:not(:disabled):not(.disabled).active, 
+	&:not(:disabled):not(.disabled):active {
+		&:focus {
+			@include common-box-shadow-1();
+		}
+	}
+}
+
+@mixin btn-primary-invert {
+	background-color: $primary-color-white;
+	border-color: $primary-color-white;
+	color: $primary-color-orange;
+	@include common-box-shadow-1();
+	&:hover,
+	&:focus,
+	&:not(:disabled):not(.disabled).active, 
+	&:not(:disabled):not(.disabled):active {
+		background-color: $primary-color-dark-blue;
+		border-color: $primary-color-dark-blue;
+		color: $primary-color-white;
+	}
+	&.disabled,
+	&:disabled {
+		background-color: $primary-color-white;
+		border-color: $primary-color-white;
+		color: $primary-color-orange;
+	}
+	&:not(:disabled):not(.disabled).active, 
+	&:not(:disabled):not(.disabled):active {
+		&:focus {
+			@include common-box-shadow-1();
+		}
+	}
+}
+
+
+@mixin btn-outline-secondary {
+	border-color: $primary-color-orange;
+	color: $primary-color-orange;
+	background-color: transparent;
+	&:hover,
+	&:focus,
+	&:not(:disabled):not(.disabled).active, 
+	&:not(:disabled):not(.disabled):active {
+		background-color: $primary-color-orange;
+		border-color: $primary-color-orange;
+		color: $primary-color-white;
+	}
+	&.disabled,
+	&:disabled {
+		border-color: $primary-color-orange;
+		color: $primary-color-orange;
+		background-color: transparent;
+	}
+	&:focus {
+		box-shadow: none;
+	}
+	&:not(:disabled):not(.disabled).active, 
+	&:not(:disabled):not(.disabled):active {
+		&:focus {
+			box-shadow: none;
+		}
+	}
+}
+  
+@mixin btn-outline-secondary-invert {
+	border-color: $primary-color-white;
+	color: $primary-color-white;
+	&:hover,
+	&:focus,
+	&:not(:disabled):not(.disabled).active, 
+	&:not(:disabled):not(.disabled):active {
+		background-color: $primary-color-white;
+		border-color: $primary-color-white;
+		color: $primary-color-orange;
+	}
+	&.disabled,
+	&:disabled {
+		border-color: $primary-color-white;
+		color: $primary-color-white;	
+	}
+	&:focus {
+		box-shadow: none;
+	}
+	&:not(:disabled):not(.disabled).active, 
+	&:not(:disabled):not(.disabled):active {
+		&:focus {
+			box-shadow: none;
+		}
+	}
+}
+
+@mixin common-ptb {
+	padding-top: 7.5rem;
+	padding-bottom: 7.5rem;
+	@include breakpoint(mobile-max) {
+	  padding-top: 3rem;
+	  padding-bottom: 3rem;
+	}
+}
+
+@mixin common-pt {
+	padding-top: 7.5rem;
+	@include breakpoint(mobile-max) {
+		padding-top: 3rem;
+	}
+}
+
+@mixin common-pb {
+	padding-bottom: 7.5rem;
+	@include breakpoint(mobile-max) {
+		padding-bottom: 3rem;
+	}
+}
